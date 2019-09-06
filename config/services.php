@@ -46,7 +46,7 @@ return [
     'facebook' => [
         'client_id' => '2035243703253836',
         'client_secret' => '6fa56168524ae03724a626c6e231db8b',
-        'redirect' => 'https://www.tutsmake.com/laravel-example/callback/facebook',
+        'redirect' => 'https://techcloudltd.com/dm/callback/facebook',
     ],
 
 ];
