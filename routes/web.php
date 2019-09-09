@@ -14,10 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/home', 'DashboardController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
+
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/category-add/{id?}', 'CategoryController@create')->name('category.add');
+Route::post('/category-submit', 'CategoryController@store')->name('category.submit');
+Route::get('/category-list', 'CategoryController@index')->name('category.list');
+Route::post('/category-show', 'CategoryController@categoryTable')->name('category.table');

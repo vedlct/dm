@@ -239,5 +239,6 @@
 <script src="{{url('public/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{url('public/dist/js/demo.js')}}"></script>
+@yield('js')
 </body>
 </html>
