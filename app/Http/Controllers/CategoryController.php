@@ -8,10 +8,14 @@ use Yajra\DataTables\DataTables;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
-        return view('admin.categoryList');
+        return view('admin.category.categoryList');
     }
 
     public function create($id=false)
@@ -21,7 +25,7 @@ class CategoryController extends Controller
         }else{
             $data = false;
         }
-        return view('admin.addCategory',compact('data'));
+        return view('admin.category.addCategory',compact('data'));
     }
 
     public function store(Request $data)

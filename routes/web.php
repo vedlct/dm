@@ -33,3 +33,6 @@ Route::get('/product-add/{id?}', 'ProductController@create')->name('product.add'
 Route::post('/product-submit', 'ProductController@store')->name('product.submit');
 Route::get('/product-list', 'ProductController@index')->name('product.list');
 Route::post('/product-show', 'ProductController@productTable')->name('product.table');
+
+//Cart
+Route::get('/checkout', 'OrderController@index')->name('checkout');

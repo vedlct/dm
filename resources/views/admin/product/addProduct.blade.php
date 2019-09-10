@@ -34,7 +34,7 @@
                                     <select class="form-control" id="status" name="fkcategoryId" >
                                         <option value="">Select Category</option>
                                         @foreach($categoryInfo as $aC)
-                                            <option @if(old('fkcategoryId')==$aC->fkcategoryId )selected @endif value="{{$aC->fkcategoryId}}">{{$aC->categoryName}}</option>
+                                            <option @if($data && $data->fkcategoryId==$aC->id) selected @endif value="{{$aC->id}}">{{$aC->categoryName}}</option>
                                         @endforeach
                                     </select>
                                 </div>

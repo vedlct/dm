@@ -10,7 +10,11 @@ use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('admin.product.productList');
@@ -32,9 +36,14 @@ class ProductController extends Controller
     {
         $this->validate($data, [
             'productName' => 'required',
+
             'price' => 'required',
 //            'fkcategoryId'=>'required'
-       ]);
+
+
+            'price' => 'required|numeric'
+        ]);
+
 
         if (!empty($data->productId))
             $product = Product::find($data->productId);
