@@ -30,7 +30,7 @@
                                     <select class="form-control" id="status" name="status" >
                                         <option value="">Select status</option>
                                         <option value="active" @if($data && $data->status=='active')selected @endif >Active</option>
-                                        <option value="deactivate" @if($data && $data->status=='deactivate')selected @endif >Deactivate</option>
+                                        <option value="deactive" @if($data && $data->status=='deactive')selected @endif >Deactive</option>
                                     </select>
                                 </div>
                             </div>

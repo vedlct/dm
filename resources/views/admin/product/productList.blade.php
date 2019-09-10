@@ -78,83 +78,19 @@
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="info-box bg-yellow">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">CPU Traffic</span>
-                            <span class="info-box-number">90<small>%</small></span>
-                        </div>
-                        <!-- /.info-box-content -->
+                @if(!empty($category))
+                    @foreach($category as $categories)
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <a href="{{url('/product-list/'.$categories->id)}}" >
+                            <div class="info-box">
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{$categories->categoryName}}</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="info-box  bg-green">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-
-                <!-- fix for small devices only -->
-                <div class="clearfix visible-sm-block"></div>
-
-                <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="info-box  bg-red">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Sales</span>
-                            <span class="info-box-number">760</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="info-box  bg-blue">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-
-                <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="info-box bg-aqua">
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-
-                <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="info-box bg-red">
-
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <!-- /.col -->
+                    @endforeach
+                @endif
             </div>
 
 
@@ -164,100 +100,25 @@
                   <div class="box box-success">
                       <div class="box-header with-border">
                           <h3 class="box-title">products</h3>
-
-                          <div class="box-tools pull-right">
-                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                              </button>
-                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                          </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body no-padding">
                           <div class="row">
-
-                              <!-- /.col -->
-                              <div class="col-md-2 col-sm-6 col-xs-12">
-                                  <div class="info-box bg-yellow">
-
-                                      <div class="info-box-content">
-                                          <span class="info-box-text">CPU Traffic</span>
-                                          <span class="info-box-number">90<small>%</small></span>
-                                          <i class="ion ion-ios-cart-outline fa-2x" style="color: white;float: right;margin-top: 1%;"></i>
+                              @if($product)
+                                  @foreach($product as $products)
+                                      <div class="col-md-2 col-sm-6 col-xs-12">
+                                          <div class="info-box bg-yellow">
+                                              <div class="info-box-content">
+                                                  <span class="info-box-text">{{$products->productName}}</span>
+                                                  <span class="info-box-number">{{$products->price}}<small>%</small></span>
+                                                  <a href="{{url('/add-to-cart/'.$products->productId)}}">
+                                                    <i class="ion ion-ios-cart-outline fa-2x" style="color: white;float: right;margin-top: 1%;"></i>
+                                                  </a>
+                                              </div>
+                                          </div>
                                       </div>
-                                      <!-- /.info-box-content -->
-                                  </div>
-                                  <!-- /.info-box -->
-                              </div>
-                              <!-- /.col -->
-                              <div class="col-md-2 col-sm-6 col-xs-12">
-                                  <div class="info-box bg-aqua">
-
-                                      <div class="info-box-content">
-                                          <span class="info-box-text">Likes</span>
-                                          <span class="info-box-number">41,410</span>
-                                          <i class="ion ion-ios-cart-outline fa-2x" style="color: white;float: right;margin-top: 1%;"></i>
-                                      </div>
-                                      <!-- /.info-box-content -->
-                                  </div>
-                                  <!-- /.info-box -->
-                              </div>
-                              <!-- /.col -->
-
-                              <!-- fix for small devices only -->
-                              <div class="clearfix visible-sm-block"></div>
-
-                              <div class="col-md-2 col-sm-6 col-xs-12">
-                                  <div class="info-box bg-red">
-
-                                      <div class="info-box-content">
-                                          <span class="info-box-text">Sales</span>
-                                          <span class="info-box-number">760</span>
-                                          <i class="ion ion-ios-cart-outline fa-2x" style="color: white;float: right;margin-top: 1%;"></i>
-                                      </div>
-                                      <!-- /.info-box-content -->
-                                  </div>
-                                  <!-- /.info-box -->
-                              </div>
-                              <!-- /.col -->
-                              <div class="col-md-2 col-sm-6 col-xs-12">
-                                  <div class="info-box bg-green">
-
-                                      <div class="info-box-content">
-                                          <span class="info-box-text">New Members</span>
-                                          <span class="info-box-number">2,000</span>
-                                          <i class="ion ion-ios-cart-outline fa-2x" style="color: white;float: right;margin-top: 1%;"></i>
-                                      </div>
-                                      <!-- /.info-box-content -->
-                                  </div>
-                                  <!-- /.info-box -->
-                              </div>
-
-                              <div class="col-md-2 col-sm-6 col-xs-12">
-                                  <div class="info-box bg-blue">
-
-                                      <div class="info-box-content">
-                                          <span class="info-box-text">New Members</span>
-                                          <span class="info-box-number">2,000</span>
-                                          <i class="ion ion-ios-cart-outline fa-2x" style="color: white;float: right;margin-top: 1%;"></i>
-                                      </div>
-                                      <!-- /.info-box-content -->
-                                  </div>
-                                  <!-- /.info-box -->
-                              </div>
-
-                              <div class="col-md-2 col-sm-6 col-xs-12">
-                                  <div class="info-box bg-aqua">
-
-
-                                      <div class="info-box-content">
-                                          <span class="info-box-text">New Members</span>
-                                          <span class="info-box-number">2,000</span>
-                                          <i class="ion ion-ios-cart-outline fa-2x" style="color: white;float: right;margin-top: 1%;"></i>
-                                      </div>
-                                      <!-- /.info-box-content -->
-                                  </div>
-                                  <!-- /.info-box -->
-                              </div>
+                                  @endforeach
+                              @endif
                           </div>
                           <!-- /.row -->
                       </div>

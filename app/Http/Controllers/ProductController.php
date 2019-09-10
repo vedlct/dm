@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
@@ -15,9 +15,15 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id=false)
     {
-        return view('admin.product.productList');
+        $category = Category::where('status','active')->get();
+        if ($id){
+            $product = Product::where('fkcategoryId',$id)->get();
+        }else{
+            $product = false;
+        }
+        return view('admin.product.productList',compact('category','product'));
     }
 
     public function create($id=false)
@@ -36,11 +42,6 @@ class ProductController extends Controller
     {
         $this->validate($data, [
             'productName' => 'required',
-
-            'price' => 'required',
-//            'fkcategoryId'=>'required'
-
-
             'price' => 'required|numeric'
         ]);
 
@@ -60,10 +61,16 @@ class ProductController extends Controller
         return redirect('/product-list');
     }
 
-    public function productTable(Request $data)
+    public function addToCart($id)
     {
-        $product_data = Product::all();
-        $datatables = DataTables::of($product_data);
-        return $datatables->make(true);
+        $product = Product::find($id);
+        \Cart::session(Auth::user()->userId)->add(array(
+            'id' => $product->productId,
+            'name' => $product->productName,
+            'price' => $product->price,
+            'quantity' => 1,
+            'attributes' => array()
+        ));
+        return redirect('/product-list');
     }
 }

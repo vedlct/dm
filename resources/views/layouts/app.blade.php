@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+{{--@php--}}
+{{--foreach (Session::get('cart_item') as $data){--}}
+{{--print_r($data->price);--}}
+{{--}--}}
+{{--    exit();@endphp--}}
+    <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -66,36 +71,22 @@
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="ion ion-ios-cart-outline"></i>
-                            <span class="label label-success">4</span>
+                            <span class="label label-success">{{Cart::session(Auth::user()->userId)->getContent()->count()  }}</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header" style="text-align: center;">You have 4 messages</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <h4>
-                                                Support Team
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
+                                    @foreach (Cart::session(Auth::user()->userId)->getContent() as $data)
                                     <li>
-                                        <a href="#">
-
-                                            <h4>
-                                                AdminLTE Design Team
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
+                                        <h4>{{$data->name}}</h4>
+                                        <p>{{$data->price.' * '.$data->quantity}}</p>
                                     </li>
-
-
+                                    @endforeach
                                 </ul>
                             </li>
-                            <li class="footer"><a href="{{url('/checkout')}}">CheckOut</a></li>
+                            @if(!Cart::session(Auth::user()->userId)->isEmpty())
+                                <li class="footer"><a href="{{url('/checkout')}}">CheckOut</a></li>
+                            @endif
                         </ul>
                     </li>
 
