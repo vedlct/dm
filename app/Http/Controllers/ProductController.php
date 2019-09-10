@@ -32,8 +32,9 @@ class ProductController extends Controller
     {
         $this->validate($data, [
             'productName' => 'required',
-            'price' => 'required'
-        ]);
+            'price' => 'required',
+//            'fkcategoryId'=>'required'
+       ]);
 
         if (!empty($data->productId))
             $product = Product::find($data->productId);
