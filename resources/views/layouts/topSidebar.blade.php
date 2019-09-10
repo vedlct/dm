@@ -43,6 +43,19 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Product</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('/product-add')}}"><i class="fa fa-circle-o"></i>Add Product</a></li>
+                    <li><a href="{{url('/product-list')}}"><i class="fa fa-circle-o"></i>Product List</a></li>
+                </ul>
+            </li>
+
         </ul>
     </section>
     <!-- /.sidebar -->
