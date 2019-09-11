@@ -37,6 +37,11 @@
 					<span class="login100-form-title p-b-53">
 						Sign In With
 					</span>
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger" role="alert">{{$error}}</div>
+                    @endforeach
+                @endif
 
                 <a href="{{url('/auth/redirect/facebook')}}" class="btn-face m-b-20">
                     <i class="fa fa-facebook-official"></i>

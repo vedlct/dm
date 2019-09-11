@@ -37,11 +37,10 @@ class ProductController extends Controller
         $this->validate($data, [
             'productName' => 'required',
 
-            'price' => 'required',
+            'price' => 'required'
 //            'fkcategoryId'=>'required'
 
 
-            'price' => 'required|numeric'
         ]);
 
 
