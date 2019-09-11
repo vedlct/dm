@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', 'DashboardController@index')->name('home');
+Route::get('/home', 'ProductController@index')->name('home');
 
 Auth::routes();
 
@@ -36,3 +36,9 @@ Route::get('/add-to-cart/{id}', 'ProductController@addToCart');
 
 //Cart
 Route::get('/checkout', 'OrderController@index')->name('checkout');
+Route::post('/order-confirm', 'OrderController@orderConfirm')->name('orderConfirm');
+
+//order
+Route::get('/orders', 'OrderController@orders')->name('orders');
+Route::post('/orders', 'OrderController@allorders')->name('allOrders');
+Route::post('/order-details', 'OrderController@orderDetails')->name('orderDetails');

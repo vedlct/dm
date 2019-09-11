@@ -42,13 +42,7 @@ class ProductController extends Controller
     {
         $this->validate($data, [
             'productName' => 'required',
-
-
-            'price' => 'required'
-//            'fkcategoryId'=>'required'
-
-
-
+            'price' => 'required|numeric'
         ]);
 
 
@@ -58,7 +52,6 @@ class ProductController extends Controller
             $product = new Product;
 
         $product->productName = $data->productName;
-        $product->productShortDescription= $data->productShortDescription;
         $product->price= $data->price;
         $product->fkcategoryId=$data->fkcategoryId;
         $product->fkAddedBy=Auth::user()->userId;
@@ -71,13 +64,19 @@ class ProductController extends Controller
     public function addToCart($id)
     {
         $product = Product::find($id);
-        \Cart::session(Auth::user()->userId)->add(array(
-            'id' => $product->productId,
-            'name' => $product->productName,
-            'price' => $product->price,
-            'quantity' => 1,
-            'attributes' => array()
-        ));
-        return redirect('/product-list');
+        $c= \Cart::session(Auth::user()->userId)->getContent()->where('id',$product->productId)->toArray();
+
+        if (empty($c)){
+            \Cart::session(Auth::user()->userId)->add(array(
+                'id' => $product->productId,
+                'name' => $product->productName,
+                'price' => $product->price,
+                'quantity' => 1,
+                'attributes' => array()
+            ));
+            return redirect()->back();
+        }else{
+            return redirect()->back()->with(['message'=>'Product is al ready added to cart.']);
+        }
     }
 }
