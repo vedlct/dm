@@ -9,11 +9,7 @@
                 @if(!empty($category))
                     @foreach($category as $categories)
                     <div class="col-md-1 col-sm-6 col-xs-12">
-                        <a href="{{url('/product-list/'.$categories->id)}}" >
-                            <div class="box-footer" style="background-color: #3C8DBC;">
-                                <button type="submit" class="btn btn-primary" style="border: none;text-align: center;background-color:#3C8DBC;">{{$categories->categoryName}}</button>
-                            </div>
-                        </a>
+                        <a href="{{url('/product-list/'.$categories->id)}}" class="btn btn-lg btn-success" >{{$categories->categoryName}}</a>
                     </div>
                     @endforeach
                 @endif
