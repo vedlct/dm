@@ -29,6 +29,10 @@
                                         <label for="categoryName">Product Price</label>
                                         <input type="text" class="form-control" name="price" id="price" placeholder="Enter product price" @if($data)value="{{$data->price}}" @endif >
                                     </div>
+                                    <div class="form-group">
+                                        <label>Product Short Description</label>
+                                        <textarea class="form-control" rows="3" name="productShortDescription" placeholder="Enter ..."></textarea>
+                                    </div>
                                 <div class="form-group">
                                     <label for="status">Category</label>
                                     <select class="form-control" id="status" name="fkcategoryId" >

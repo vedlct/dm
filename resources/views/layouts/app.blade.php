@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+{{--@php--}}
+{{--foreach (Session::get('cart_item') as $data){--}}
+{{--print_r($data->price);--}}
+{{--}--}}
+{{--    exit();@endphp--}}
+    <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -21,25 +26,25 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{url('public/dist/css/skins/_all-skins.min.css')}}">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="{{url('public/bower_components/morris.js/morris.css')}}">
+    {{--<link rel="stylesheet" href="{{url('public/bower_components/morris.js/morris.css')}}">--}}
     <!-- jvectormap -->
-    <link rel="stylesheet" href="{{url('public/bower_components/jvectormap/jquery-jvectormap.css')}}">
+    {{--<link rel="stylesheet" href="{{url('public/bower_components/jvectormap/jquery-jvectormap.css')}}">--}}
     <!-- Date Picker -->
-    <link rel="stylesheet" href="{{url('public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{url('public/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+    {{--<link rel="stylesheet" href="{{url('public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">--}}
+    {{--<!-- Daterange picker -->--}}
+    {{--<link rel="stylesheet" href="{{url('public/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">--}}
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="{{url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+    {{--<link rel="stylesheet" href="{{url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">--}}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
     <![endif]-->
 
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    {{--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--}}
     @yield('css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -66,88 +71,68 @@
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="ion ion-ios-cart-outline"></i>
-                            <span class="label label-success">4</span>
+                            <span class="label label-success">{{Cart::session(Auth::user()->userId)->getContent()->count()  }}</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header" style="text-align: center;">You have 4 messages</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <h4>
-                                                Support Team
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
-                                    <li>
-                                        <a href="#">
-
-                                            <h4>
-                                                AdminLTE Design Team
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-
-
+                                    {{--@foreach (Cart::session(Auth::user()->userId)->getContent() as $data)--}}
+                                    {{--<li>--}}
+                                        {{--<h4>{{$data->name}}</h4>--}}
+                                        {{--<p>{{$data->price.' * '.$data->quantity}}</p>--}}
+                                    {{--</li>--}}
+                                    {{--@endforeach--}}
+                                        @foreach (Cart::session(Auth::user()->userId)->getContent() as $data)
+                                        <li><!-- start message -->
+                                            <a href="#">
+                                                <h4 style="margin-left: 40%;">
+                                                    {{$data->name}}
+                                                </h4>
+                                                <p style="margin-left: 40%;">{{$data->price.' * '.$data->quantity}}</p>
+                                            </a>
+                                        </li>
+                                            @endforeach
                                 </ul>
                             </li>
-                            <li class="footer"><a href="{{url('/checkout')}}">CheckOut</a></li>
+                            @if(!Cart::session(Auth::user()->userId)->isEmpty())
+                                <li class="footer"><a href="{{url('/checkout')}}">CheckOut</a></li>
+                            @endif
                         </ul>
                     </li>
 
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{url('public/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                        <a href="{{ route('logout') }}" class="btn btn-primary btn-flat" onclick="event.preventDefault();
+									document.getElementById('logout-form').submit();" style="border: none;"><i class="fa fa-sign-out"></i>
+                            {{ __('Logout') }}
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </a>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="{{url('public/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                        {{--<ul class="dropdown-menu">--}}
+                            {{--<!-- User image -->--}}
 
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-									document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                            {{--<!-- Menu Body -->--}}
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
+                            {{--<!-- Menu Footer-->--}}
+                            {{--<li class="user-footer">--}}
+                                {{--<div class="pull-left">--}}
+                                    {{--<a href="#" class="btn btn-default btn-flat">Profile</a>--}}
+                                {{--</div>--}}
+                                {{--<div class="pull-right">--}}
+                                    {{--<a class="btn btn-default btn-flat" href="{{ route('logout') }}"--}}
+                                       {{--onclick="event.preventDefault();--}}
+									{{--document.getElementById('logout-form').submit();">--}}
+                                        {{--{{ __('Logout') }}--}}
+                                    {{--</a>--}}
+
+                                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                        {{--@csrf--}}
+                                    {{--</form>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
                     </li>
                     <!-- Control Sidebar Toggle Button -->
 
@@ -374,26 +359,26 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{url('public/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- Morris.js charts -->
-<script src="{{url('public/bower_components/raphael/raphael.min.js')}}"></script>
-<script src="{{url('public/bower_components/morris.js/morris.min.js')}}"></script>
+{{--<script src="{{url('public/bower_components/raphael/raphael.min.js')}}"></script>--}}
+{{--<script src="{{url('public/bower_components/morris.js/morris.min.js')}}"></script>--}}
 <!-- Sparkline -->
-<script src="{{url('public/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
-<!-- jvectormap -->
-<script src="{{url('public/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-<script src="{{url('public/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{url('public/bower_components/jquery-knob/dist/jquery.knob.min.js')}}"></script>
+{{--<script src="{{url('public/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>--}}
+{{--<!-- jvectormap -->--}}
+{{--<script src="{{url('public/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>--}}
+{{--<script src="{{url('public/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>--}}
+{{--<!-- jQuery Knob Chart -->--}}
+{{--<script src="{{url('public/bower_components/jquery-knob/dist/jquery.knob.min.js')}}"></script>--}}
 <!-- daterangepicker -->
-<script src="{{url('public/bower_components/moment/min/moment.min.js')}}"></script>
-<script src="{{url('public/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-<!-- datepicker -->
-<script src="{{url('public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="{{url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
-<!-- Slimscroll -->
-<script src="{{url('public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
-<!-- FastClick -->
-<script src="{{url('public/bower_components/fastclick/lib/fastclick.js')}}"></script>
+{{--<script src="{{url('public/bower_components/moment/min/moment.min.js')}}"></script>--}}
+{{--<script src="{{url('public/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>--}}
+{{--<!-- datepicker -->--}}
+{{--<script src="{{url('public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
+{{--<!-- Bootstrap WYSIHTML5 -->--}}
+{{--<script src="{{url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>--}}
+{{--<!-- Slimscroll -->--}}
+{{--<script src="{{url('public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>--}}
+{{--<!-- FastClick -->--}}
+{{--<script src="{{url('public/bower_components/fastclick/lib/fastclick.js')}}"></script>--}}
 <!-- AdminLTE App -->
 <script src="{{url('public/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

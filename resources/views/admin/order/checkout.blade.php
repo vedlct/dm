@@ -33,6 +33,7 @@
                         </form>
                     </div>
                 </div>
+                @if(!Cart::session(Auth::user()->userId)->isEmpty())
                 <div class="col-lg-4 col-xs-6">
                     <div class="box">
                         <div class="box-header">
@@ -45,44 +46,22 @@
                                     <th style="width: 10px">#</th>
                                     <th>Product Name</th>
                                     <th>Price</th>
+                                    <th>Quantity</th>
                                 </tr>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        BDT 100
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Clean database</td>
-                                    <td>
-                                        BDT 100
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Cron job running</td>
-                                    <td>
-                                        BDT 100
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Fix and squish bugs</td>
-                                    <td>
-                                        BDT 100
-                                    </td>
-
-                                </tr>
+                                @foreach (Cart::session(Auth::user()->userId)->getContent() as $data)
+                                    <tr>
+                                        <td style="width: 10px">{{$data->id}}</td>
+                                        <td>{{$data->name}}</td>
+                                        <td>{{$data->price}}</td>
+                                        <td>{{$data->quantity}}</td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
                         <!-- /.box-body -->
                     </div>
                 </div>
+                    @endif
             </div>
         </section>
     </div>
