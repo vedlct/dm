@@ -31,7 +31,7 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Category</span>
+                    <i class="fa fa-edit"></i> <span>Category</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -44,7 +44,7 @@
 
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Product</span>
+                    <i class="fa fa-edit"></i> <span>Product</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -56,7 +56,7 @@
             </li>
             <li>
                 <a href="{{url('/orders')}}">
-                    <i class="fa fa-dashboard"></i> <span>Order</span>
+                    <i class="fa fa-laptop"></i> <span>Order</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
