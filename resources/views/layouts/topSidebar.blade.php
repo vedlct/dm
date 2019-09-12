@@ -9,6 +9,7 @@
                     <span class="pull-right-container"></span>
                 </a>
             </li>
+            @if(Auth::user()->type->userTypeName==='admin')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Category</span>
@@ -21,7 +22,7 @@
                     <li><a href="{{url('/category-list')}}"><i class="fa fa-circle-o"></i> List</a></li>
                 </ul>
             </li>
-
+            @endif
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Product</span>

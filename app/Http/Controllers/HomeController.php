@@ -20,7 +20,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        Cart::session(Auth::user()->userId)->clear();
-        return view('home');
+//        Cart::session(Auth::user()->userId)->clear();
+//        return view('home');
     }
 }

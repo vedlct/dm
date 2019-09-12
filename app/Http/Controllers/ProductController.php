@@ -13,6 +13,7 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+//        dd(Auth::user()->type('userTypeName'));
     }
 
     public function index($id=false)

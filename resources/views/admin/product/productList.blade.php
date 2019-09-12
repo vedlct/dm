@@ -4,22 +4,6 @@
 
     <div class="content-wrapper">
         <section class="content">
-            <!-- Small boxes (Stat box) -->
-
-            {{--<div class="row">--}}
-                {{--@if(!empty($category))--}}
-                    {{--@foreach($category as $categories)--}}
-                    {{--<div class="col-md-1 col-sm-6 col-xs-12">--}}
-                        {{--<a href="{{url('/product-list/'.$categories->id)}}" >--}}
-                            {{--<div class="box-footer" style="background-color: #3C8DBC;">--}}
-                                {{--<button type="submit" class="btn btn-primary btn-xs" style="border: none;text-align: center;background-color:#3C8DBC;">{{$categories->categoryName}}</button>--}}
-
-                            {{--</div>--}}
-                        {{--</a>--}}
-                    {{--</div>--}}
-                    {{--@endforeach--}}
-                {{--@endif--}}
-            {{--</div>--}}
             <div class="row" style="margin-left: 1%;">
                 <div class="timeline-footer">
                     @if(!empty($category))
