@@ -5,6 +5,7 @@
     <div class="content-wrapper">
         <section class="content">
             <!-- Small boxes (Stat box) -->
+
             {{--<div class="row">--}}
                 {{--@if(!empty($category))--}}
                     {{--@foreach($category as $categories)--}}
@@ -27,8 +28,7 @@
                         @endforeach
                     @endif
                 </div>
-
-            </div>
+              <br>
 
             @if (session('message'))
                 <div class="alert alert-danger" role="alert">

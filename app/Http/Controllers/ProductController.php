@@ -52,6 +52,7 @@ class ProductController extends Controller
             $product = new Product;
 
         $product->productName = $data->productName;
+        $product->productShortDescription = $data->productShortDescription;
         $product->price= $data->price;
         $product->fkcategoryId=$data->fkcategoryId;
         $product->fkAddedBy=Auth::user()->userId;

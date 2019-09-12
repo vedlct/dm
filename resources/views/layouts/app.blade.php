@@ -8,7 +8,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{url('public/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
@@ -97,14 +96,8 @@
 </div>
 <!-- ./wrapper -->
 
-<script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous">
-</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
+<script src="{{url('public/js/jquery-3.4.1.min.js')}}" ></script>
+<script src="{{url('public/js/bootstrap.min.js')}}" ></script>
 <script src="{{url('public/dist/js/adminlte.min.js')}}"></script>
 
 @yield('js')
