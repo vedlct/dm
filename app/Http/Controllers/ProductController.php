@@ -13,7 +13,6 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-//        dd(Auth::user()->type('userTypeName'));
     }
 
     public function index($id=false)
@@ -29,38 +28,42 @@ class ProductController extends Controller
 
     public function create($id=false)
     {
-        $categoryInfo=Category::all();
-        if ($id){
-            $data = Product::where('productId',$id)->first();
+        if (Auth::user()->type->userTypeName==='admin') {
+            $categoryInfo=Category::all();
+            if ($id){
+                $data = Product::where('productId',$id)->first();
+            }else{
+                $data = false;
+            }
+            return view('admin.product.addProduct',compact('data','categoryInfo'));
         }else{
-            $data = false;
-
+            return redirect('/home');
         }
-        return view('admin.product.addProduct',compact('data','categoryInfo'));
     }
 
     public function store(Request $data)
     {
-        $this->validate($data, [
-            'productName' => 'required',
-            'price' => 'required|numeric'
-        ]);
+        if (Auth::user()->type->userTypeName==='admin') {
+            $this->validate($data, [
+                'productName' => 'required',
+                'price' => 'required|numeric'
+            ]);
 
+            if (!empty($data->productId))
+                $product = Product::find($data->productId);
+            else
+                $product = new Product;
 
-        if (!empty($data->productId))
-            $product = Product::find($data->productId);
-        else
-            $product = new Product;
+            $product->productName = $data->productName;
+            $product->productShortDescription = $data->productShortDescription;
+            $product->price = $data->price;
+            $product->fkcategoryId = $data->fkcategoryId;
+            $product->fkAddedBy = Auth::user()->userId;
+            $product->createdAt = \Carbon\Carbon::now()->toDateTimeString();
+            $product->save();
 
-        $product->productName = $data->productName;
-        $product->productShortDescription = $data->productShortDescription;
-        $product->price= $data->price;
-        $product->fkcategoryId=$data->fkcategoryId;
-        $product->fkAddedBy=Auth::user()->userId;
-        $product->createdAt=\Carbon\Carbon::now()->toDateTimeString();
-        $product->save();
-
-        return redirect('/product-list');
+            return redirect('/product-list');
+        }
     }
 
     public function addToCart($id)
