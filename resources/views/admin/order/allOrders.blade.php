@@ -3,11 +3,27 @@
 
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{url('/public/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <section class="content">
+            <div class="row">
+                <div class=" col-md-5">
+                    <div class="form-group">
+                        <label>Date range:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+{{--                            {{\Carbon\Carbon::now()->subMonth()->isoFormat('MM/DD/YYYY').' - '.\Carbon\Carbon::now()->isoFormat('MM/DD/YYYY')}}--}}
+                            <input type="text" class="form-control pull-right date" id="reservation" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-12 col-xs-12">
                     <div class="box">
@@ -45,17 +61,24 @@
 
 @section('js')
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="{{url('/public/bower_components/moment/min/moment.min.js')}}"></script>
+    <script src="{{url('/public/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
     <script>
+
+        $(function () {
+            $('#reservation').daterangepicker()
+        });
         $(document).ready(function() {
-            $('#orderTable').DataTable({
+            table = $('#orderTable').DataTable({
                 processing: true,
                 serverSide: true,
                 stateSave: true,
                 ajax:{
                     "url": "{!! route('allOrders')!!}",
                     "type": "POST",
-                    data:function (d){
+                    "data":function (d){
                         d._token="{{csrf_token()}}";
+                        d.dd=$('#reservation').val();
                     },
                 },
                 columns: [
@@ -65,15 +88,13 @@
                     { data: 'orderStatus',title:'Status', name: 'orderStatus',"orderable": true, "searchable":true },
                     { data: 'paymentMethod',title:'Payment Method', name: 'paymentMethod',"orderable": true, "searchable":true },
                     { data: 'paymentStatus',title:'Payment Status', name: 'paymentStatus',"orderable": true, "searchable":true },
-                    { data: 'orderAt',title:'Order At', name: 'orderAt',"orderable": false, "searchable":true },
+                    { data: 'orderdate',title:'Order At', name: 'orderdate',"orderable": false, "searchable":true },
 
                     { title:'Action',"data": function(data){
                             return '<button class="btn btn-sm btn-info" onclick="orderView('+data.orderId+')"><i class="fa fa-eye"></i></button>'
                                 ;},
                         "orderable": false, "searchable":false
                     },
-
-
                 ],
             });
         });
@@ -90,5 +111,9 @@
                 }
             });
         }
+
+        $('#reservation').change(function(){
+            table.ajax.reload();
+        });
     </script>
 @endsection

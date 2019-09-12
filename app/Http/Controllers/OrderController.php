@@ -51,8 +51,16 @@ class OrderController extends Controller
 
     public function allorders(Request $data)
     {
-        $order_data = Order::leftjoin('user','user.userId', '=', 'order.fkOrderBy')->get();
-        $datatables = DataTables::of($order_data);
+        $date = explode("-",$data->dd);
+        $order_data = Order::leftjoin('user','user.userId', '=', 'order.fkOrderBy')
+                        ->whereBetween('orderAt', [date("Y-m-d", strtotime($date[0])), date("Y-m-d", strtotime($date[1]))])
+                        ->get();
+        $datatables = DataTables::of($order_data)
+            ->addColumn('orderdate', function (Order $data){
+//                return \Carbon\Carbon::now()->toDateTimeString();
+//                return \Carbon\Carbon::createFromFormat('YYYY-MM-DD', $data->orderAt);
+                return $data->orderAt;
+            });
         return $datatables->make(true);
     }
 
