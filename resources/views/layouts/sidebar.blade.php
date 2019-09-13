@@ -43,6 +43,14 @@
                     <li><a href="{{url('/product-list')}}"><i class="fa fa-circle-o"></i>Product List</a></li>
                 </ul>
             </li>
+            @if(Auth::user()->type->userTypeName==='admin')
+                <li>
+                    <a href="{{url('/user-list')}}">
+                        <i class="fa fa-edit"></i> <span>Users</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
+              @endif
 
         </ul>
     </section>

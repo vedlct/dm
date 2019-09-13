@@ -17,6 +17,7 @@ Route::post('/category-show', 'CategoryController@categoryTable')->name('categor
 Route::get('/product-add/{id?}', 'ProductController@create')->name('product.add');
 Route::post('/product-submit', 'ProductController@store')->name('product.submit');
 Route::get('/product-list/{id?}', 'ProductController@index')->name('product.list');
+Route::post('/product-show', 'ProductController@productTable')->name('product.table');
 Route::get('/add-to-cart/{id}', 'ProductController@addToCart');
 
 //Cart
@@ -27,3 +28,7 @@ Route::post('/order-confirm', 'OrderController@orderConfirm')->name('orderConfir
 Route::get('/orders', 'OrderController@orders')->name('orders');
 Route::post('/orders', 'OrderController@allorders')->name('allOrders');
 Route::post('/order-details', 'OrderController@orderDetails')->name('orderDetails');
+
+//user list
+Route::get('/user-list', 'UserController@index')->name('user.list');
+Route::post('/user-show', 'UserController@userTable')->name('user.table');

@@ -42,6 +42,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
+                    @if(Auth::user()->type->userTypeName==='user')
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="ion ion-ios-cart-outline"></i>
@@ -67,6 +68,7 @@
                             @endif
                         </ul>
                     </li>
+                    @endif
                     <li class="dropdown user user-menu">
                         <a href="{{ route('logout') }}" class="btn btn-primary btn-flat" onclick="event.preventDefault();
 									document.getElementById('logout-form').submit();" style="border: none;"><i class="fa fa-sign-out"></i>

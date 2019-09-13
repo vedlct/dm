@@ -7,6 +7,7 @@ use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -84,5 +85,11 @@ class ProductController extends Controller
         }else{
             return redirect()->back()->with(['message'=>'Product is al ready added to cart.']);
         }
+    }
+    public function productTable(Request $data)
+    {
+        $product_data = Product::all();
+        $datatables = DataTables::of($product_data);
+        return $datatables->make(true);
     }
 }

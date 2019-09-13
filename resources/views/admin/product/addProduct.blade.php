@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Product Short Description</label>
-                                        <textarea class="form-control" rows="3" name="productShortDescription" placeholder="Enter ..."></textarea>
+                                        <textarea class="form-control" rows="3" name="productShortDescription" id="productShortDescription" placeholder="Enter ..." @if($data)value="{{$data->productShortDescription}}"@endif></textarea>
                                     </div>
                                 <div class="form-group">
                                     <label for="status">Category</label>
