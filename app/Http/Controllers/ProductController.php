@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use App\Category;
@@ -59,7 +60,7 @@ class ProductController extends Controller
             $product->price = $data->price;
             $product->fkcategoryId = $data->fkcategoryId;
             $product->fkAddedBy = Auth::user()->userId;
-            $product->createdAt = \Carbon\Carbon::now()->toDateTimeString();
+            $product->createdAt = Carbon::now()->toDateTimeString();
             $product->save();
 
             return redirect('/product-list');

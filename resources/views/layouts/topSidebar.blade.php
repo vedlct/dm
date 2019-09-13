@@ -22,13 +22,13 @@
                     <li><a href="{{url('/category-list')}}"><i class="fa fa-circle-o"></i> List</a></li>
                 </ul>
             </li>
+            @endif
             <li>
                 <a href="{{url('/orders')}}">
                     <i class="fa fa-laptop"></i> <span>Order</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
-            @endif
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Product</span>

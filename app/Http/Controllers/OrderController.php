@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\OrderDetails;
+use Carbon\Carbon;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class OrderController extends Controller
         $Order->orderStatus = 'Confirm';
         $Order->paymentMethod = $data->paymentMethod;
         $Order->paymentStatus = $data->paymentStatus;
-        $Order->orderAt = \Carbon\Carbon::now()->toDateTimeString();
+        $Order->orderAt = Carbon::now()->toDateTimeString();
         $Order->save();
 
         if(!\Cart::session(Auth::user()->userId)->isEmpty()){
@@ -40,7 +41,6 @@ class OrderController extends Controller
             }
             \Cart::session(Auth::user()->userId)->clear();
         }
-
         return redirect('/home');
     }
 
@@ -53,13 +53,14 @@ class OrderController extends Controller
     {
         $date = explode("-",$data->dd);
         $order_data = Order::leftjoin('user','user.userId', '=', 'order.fkOrderBy')
-                        ->whereBetween('orderAt', [date("Y-m-d", strtotime($date[0])), date("Y-m-d", strtotime($date[1]))])
-                        ->get();
+                        ->whereBetween('orderAt', [date("Y-m-d", strtotime($date[0])), date("Y-m-d", strtotime($date[1]))]);
+        if (Auth::user()->fkuserTypeId==2){
+            $order_data->where('fkOrderBy',Auth::user()->userId);
+        }
+        $order_data->get();
         $datatables = DataTables::of($order_data)
             ->addColumn('orderdate', function (Order $data){
-//                return \Carbon\Carbon::now()->toDateTimeString();
-//                return \Carbon\Carbon::createFromFormat('YYYY-MM-DD', $data->orderAt);
-                return $data->orderAt;
+                return Carbon::parse($data->orderAt)->format('h:m:s A d-m-Y');
             });
         return $datatables->make(true);
     }
