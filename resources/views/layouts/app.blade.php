@@ -45,7 +45,7 @@
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="ion ion-ios-cart-outline"></i>
-                            <span class="label label-success">{{Cart::session(Auth::user()->userId)->getContent()->count()  }}</span>
+                            <span class="label label-success">{{Cart::session(Auth::user()->userId)->getContent()->count() }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -82,16 +82,12 @@
             </div>
         </nav>
     </header>
-    @include('layouts.topSidebar')
+    @include('layouts.sidebar')
 
     @yield('content')
 
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.18
-        </div>
-        <strong>Copyright &copy; 2014-2019 <a href="#">TCL</a>.</strong> All rights
-        reserved.
+        <strong>Copyright &copy; 2019 <a href="#">TCL</a>.</strong> All rights reserved.
     </footer>
 </div>
 <!-- ./wrapper -->
